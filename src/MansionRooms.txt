@@ -1,0 +1,13 @@
+12
+5 Ballroom 0
+6 Conservatory 9
+1 Hall 2
+4 Kitchen 16
+10 Corridor 1
+9 Study 7
+7 BilliardRoom 18
+11 Cellar 97
+8 Library 2
+3 DiningRoom 8
+2 Lounge 4
+0 OutsideWorld 3
