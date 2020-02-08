@@ -7,11 +7,11 @@ OBJ = HW3StarterGetAClue.o Room.o LinkedList.o production.o tests.o structures.c
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-HW2: $(OBJ)
+HW3: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 .PHONY: clean
 
 clean:
 	rm *.o
-	rm HW2
+	rm HW3
