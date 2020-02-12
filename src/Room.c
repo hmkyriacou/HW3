@@ -14,7 +14,7 @@
 int* findAdjRooms(char fileName[], int roomNum){
     
     int c = 0; //num of adjacent rooms
-    int* adjRooms = (int*) malloc(sizeof(int));
+    int* adjRooms = (int*) malloc(sizeof(int)*12);
 
     FILE* adjMat = fopen("AdjMatrix.txt", "r");
 
@@ -35,7 +35,6 @@ int* findAdjRooms(char fileName[], int roomNum){
             if (ch == '1'){
                 
                 c++; //increment num of adjacent rooms
-                adjRooms = realloc(adjRooms, sizeof(int));
                 adjRooms[c] = adjRoomNum;
 
             } else if (ch == ' ') {

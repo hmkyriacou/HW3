@@ -60,10 +60,15 @@ void savePayload(DLLNode* lp, Payload* mp)
 		//now temp points to the last element
 
 		//make a new element, attach mp to it, wire up the new element
-		DLLNode* newList = makeEmptyLinkedList();//Creates new empty (last) node
+		//puts("----1");
+        DLLNode* newList = makeEmptyLinkedList();//Creates new empty (last) node
+		//puts("----2");
 		newList->RoomP = mp;                      //Puts Payload in new node
+		//puts("----3");
 		temp->next = (struct DLLNode*)newList;   //Old last node now points to new node
+		//puts("----4");
 		newList->prev = (struct DLLNode*) temp;  //New node points backwards to old last node
+		//puts("----5");
 	}
 }
 

@@ -15,29 +15,29 @@ DLLNode* makeRooms(char name[50])
 	FILE* file = fopen(name, "r");
 	fscanf(file,"%d ", &sentinel);
 	DLLNode* Rooms = makeEmptyLinkedList();
-	printf("%d\n", sentinel);
+	//printf("%d\n", sentinel);
     
 	for (i=0; i<sentinel; i++){
 		Room* rm1 = (Room*) malloc(sizeof(Room));
 
 		fscanf(file, "%d", &rNum);
-        printf("%d ", rNum);
+        //printf("%d ", rNum);
 		rm1->roomNum = rNum;
 
 		fscanf(file, "%s", rName);
-		printf("%s ", rName);
+		//printf("%s ", rName);
         strcpy(rm1->roomName, rName);
 
 		fscanf(file, "%d", &rClues);
-        printf("%d ", rClues);
+        //printf("%d ", rClues);
 		rm1->numClues = rClues;
 
-		rm1->searched = "false";
-		rm1->discovered = "false";
+		rm1->searched = false;
+		rm1->discovered = false;
 
 		savePayload(Rooms, rm1);
 
-        printf("\n");
+        //printf("\n");
 	}
 	
     return Rooms;
