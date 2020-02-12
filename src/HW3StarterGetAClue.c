@@ -72,68 +72,38 @@ int main(void) {
         int* adjRooms = findAdjRooms("AdjMatrix.txt", searchedRoom->roomNum);
         //printRoomInfo(searchedRoom);
 
-        Room* searchedRoom;
-        int* adjRooms;
         int numOfSearchedRooms = 1;
         while (numOfSearchedRooms < 12){
            
-            /*
-            searchedRoom = findRoom(startingRoom, roomList);
-            searchedRoom->discovered = true;
-            searchedRoom->searched = true;
-            savePayload(walkThroughList, searchedRoom);
-            adjRooms = findAdjRooms("AdjMatrix.txt", searchedRoom->roomNum);
-            */
-
             printf("From the %s, you can see %d rooms.\n\n", searchedRoom->roomName, *(adjRooms-1));
-
-            //puts("The adjacent rooms are...");
-            
-            //printf("\n--------DEBUG--------\nfindAdjRooms size=%d\nfindAdjRooms[0]=%d\nfindAdjRooms[1]=%d\nfindAdjRooms[2]=%d\nfindAdjRooms[3]=%d\n\n",*(adjRooms-1), adjRooms[0], adjRooms[1], adjRooms[2], adjRooms[3]);
-            //printf("Room name: %s\n\n", findRoom(10, roomList)->roomName);
 
             Room* curRoom;
             for (int i = 0; i < *(adjRooms-1); i++){
 
-                //printf("%c", i==2 ? '1' : '\0');fflush(stdout);
                 curRoom = findRoom(adjRooms[i], roomList);
-                //printf("%c", i==2 ? '2' : '\0');fflush(stdout);
                 printf("The %s\n", curRoom->roomName);fflush(stdout);
-                //printf("%c", i==2 ? '3' : '\0');fflush(stdout);
-                //printf("%d", curRoom->discovered);
                 if (!curRoom->discovered){
                     curRoom->discovered = true;
-                    //printf("%c", i==2 ? '4' : '\0');fflush(stdout);
                     savePayload(toSearch, curRoom);
-                    //printf("%c", i==2 ? '5' : '\0');fflush(stdout);
-                    //printf("%c", i==2 ? '6' : '\0');fflush(stdout);
                 }
-
-                
-                //puts("\n----HISTORY----");
-                //printHistory(walkThroughList);
-                //puts("---END HISTORY---");fflush(stdout);
-                
             }
             printf("\n");fflush(stdout);
+            
             backFromDQFIFO* newSearch = dequeueFIFO(toSearch); 
             searchedRoom = newSearch->mp;
             toSearch = newSearch->newQHead;
- 
-            //puts("\n----HISTORY toSearch----");
-            //printHistory(toSearch);
-            //puts("---END HISTORY---");fflush(stdout);
-
-            adjRooms = findAdjRooms("AdjMatrix.txt", searchedRoom->roomNum);
-            printf("Moving into the %s...\n", searchedRoom->roomName);
-            savePayload(walkThroughList, searchedRoom);
+            if (!searchedRoom->searched){
+                adjRooms = findAdjRooms("AdjMatrix.txt", searchedRoom->roomNum);
+                printf("Moving into the %s...\n", searchedRoom->roomName);
+                savePayload(walkThroughList, searchedRoom);
                 
-            //puts("\n----HISTORY walkThroughList----");
-            //printHistory(walkThroughList);
-            //puts("---END HISTORY---");fflush(stdout);
-            
-            puts("");printHistory(walkThroughList);puts("");
-            numOfSearchedRooms++;
+                searchedRoom->searched = true;
+
+                puts("");printHistory(walkThroughList);puts("");
+                numOfSearchedRooms++;
+            }else{
+                puts("\nSearched!\n");
+            }
         }
 
     } else {
